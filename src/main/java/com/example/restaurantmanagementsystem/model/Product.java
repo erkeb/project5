@@ -1,19 +1,26 @@
-
-
 package com.example.restaurantmanagementsystem.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.example.restaurantmanagementsystem.category.ProductCategory;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
+@Table(name = "products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull(message = "Name should not be empty")
+    @Size(max = 255, message = "Name should not exceed 255 characters")
     private String name;
-    private String category;
+
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "Category should not be null")
+    private ProductCategory category;
+
+    @NotNull(message = "Price should not be null")
     private Double price;
 
     public Long getId() {
@@ -32,11 +39,11 @@ public class Product {
         this.name = name;
     }
 
-    public String getCategory() {
+    public ProductCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(ProductCategory category) {
         this.category = category;
     }
 

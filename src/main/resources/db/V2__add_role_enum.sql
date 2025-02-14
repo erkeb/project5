@@ -1,0 +1,3 @@
+ALTER TABLE users DROP COLUMN role;
+CREATE TYPE role_enum AS ENUM ('ADMIN', 'USER', 'MANAGER');
+ALTER TABLE users ADD COLUMN role role_enum;
